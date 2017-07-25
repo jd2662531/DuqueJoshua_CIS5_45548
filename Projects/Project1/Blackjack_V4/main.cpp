@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
    //Random Seed and Variable Declaration
     srand(static_cast<unsigned int>(time(0))); 
     //Declare all variables here
-    char choice;
-    string enter;
+    char choice;//choice for menu
+    string enter;//enter program
     
     cout<<"Type 'enter' to begin or type 'leave' to exit" <<endl;
     cin>>enter;
@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
         cin>>choice;
         //Solve the problem chosen
         switch(choice){
-            
+            //summery 
             case '1':
                 cout<<"Rules and How to play"<<endl;
                 cout<<"The objective is to score 21 points."<<endl;
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
                 break;                    
                                
             case '2':     
-                       
+                       //play the game
             {
                         int card1,card2,value, suit, pT, total, hT; //card1
                         //card2, value to pass to by reference, suit , player total
@@ -77,13 +77,13 @@ int main(int argc, char** argv) {
                         
                         cout<<"You have been dealt the following cards: ";
                       
-                        deal(card1, suit, total);
-                        cout<<" | ";  
-                        deal(card2, suit, total);
-                        pT=card1+card2;
+                        deal(card1, suit, total);// call fuction
+                        cout<<" and ";  
+                        deal(card2, suit, total);// call deal fuction
+                        pT=card1+card2;// add initial cards
                       
                         cout<<"Your score is now: ";
-                        cout<<pT<<endl;
+                        cout<<pT<<endl;//display initial score
                         cout<<"Would you like another card?"<<endl;
                                 cout<<"Enter '1' for yes and '0' for no: ";
                                 cin>>stay;
@@ -103,13 +103,12 @@ int main(int argc, char** argv) {
                             
                         }
                         //House's Hand
-        
-                       cout<<" "<<endl;
+                        cout<<" "<<endl;
                        cout<<"The house has been dealt: ";
                        dealh(value, suit, total);
                        hT+=value;
                        do{
-                       cout<<" | ";
+                       cout<<" and ";
                        dealh(value, suit, total);
                        hT+=value;
                        //if points are less than 16 house continues to deal
@@ -119,67 +118,68 @@ int main(int argc, char** argv) {
                        cout<<" "<<endl;
                        
                        //Outcome of game
-                       if(pT==21 && (pT!=hT))
+                       if(pT==21 && (pT!=hT))// if player gets 21 and is not tied
                            cout<<"BlackJack! You win!"<<endl;
                        if(pT>hT&&pT<21)
                        {
                            cout<<"You win"<<endl;
                        }
-                       else if(hT>21&&pT<=21)
-                       {
+                       else if(hT>21&&pT<=21)//if house goes over 21 and player
+                       {                        //is below 21
                            cout<<"House went over 21. You win"<<endl;
                        }
-                       else if(pT>21)
+                       else if(pT>21)//if player gets over 21
                        {
                            cout<<"Bust! You went over 21!"<<endl;
                        }
-                       else if(pT<hT&&hT<=21)
-                       {
+                       else if(pT<hT&&hT<=21)//if house gets closer to 21 but 
+                       {                    //below 21
                            cout<<"House Wins "<<endl;
                        }
-                       else if(pT==hT)
-                       {
+                       else if(pT==hT)//draw if player and house gets the same 
+                       {                //score
                            cout<<"Draw!"<<endl;
                        }
                        cout<<" "<<endl;
                        cout<<"Press enter to continue"<<endl;
-                       cin.get();
+                       cin.get();//pause so its easier to see interface
                                 break;
             }  
             case '3': 
                     cout<<"Goodbye!"<<endl;
-                    exit(0);
+                    exit(0);//exit menu and program
                     break;
                                 
             default: cout<<"Please pick the given options"<<endl;
-                                
+                                //input valididation using loop and default 
                             }
                         }
     cout<<"Goodbye"<<endl;
-    return 0;
+    return 0;//exit
 }
 
 //Function Definition (Card Dealing Function)
-void deal(int& crdV, int& crdS, int& Total){ //deal player
+//Pass by reference so we can change original argument and accumulate 
+void deal(int& crdV, int& crdS, int& Total){ //deal player 
     //Randomly selects card values
     crdV=rand()%14+1;
-    if ((crdV<=10) && (crdV>=2)){
+    if ((crdV<=10) && (crdV>=2)){//number card
         cout<<crdV;
         cout<<" of ";
     }
-    if (crdV==11){
+    if (crdV==11){//jack
         cout<<" Jack of ";
         crdV=10;
     }
-    if (crdV==12){
+    if (crdV==12){//queen
         cout<<" Queen of ";
         crdV=10;
     }
-    if (crdV==13){
+    if (crdV==13){//king
         cout<<" King of ";
         crdV=10;
     }
-    if (crdV==1){        
+    if (crdV==1){        //Ace plus the option to pick if its 11 or 1
         cout<<" You got an Ace, ";
         int ace;
         cout<<"would you like the value to equal 1 or 11: ";
@@ -189,7 +189,7 @@ void deal(int& crdV, int& crdS, int& Total){ //deal player
         }else
             crdV=11;
         }
-   crdS=rand()%4+1; // Suits
+   crdS=rand()%4+1; // Random suit given
    if(crdS==1){
        cout<<"Clubs ";
    }
@@ -224,10 +224,10 @@ void dealh (int& crdV, int& crdS, int& Total){ //deal house
     }
     if (crdV==14||crdV==1){        
         cout<<" Ace of ";
-         if (Total<10){
-            crdV=11;
+         if (Total<10){// Ace card value =11 if total house points is less than 
+            crdV=11;    //10
         }else
-            crdV=1;
+            crdV=1;//if total is less than 10 the value of ace is 1
     }
    crdS=rand()%4+1; // Suits
    if(crdS==1){
