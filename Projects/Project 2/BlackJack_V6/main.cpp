@@ -75,20 +75,24 @@ int main(int argc, char** argv) {
                                
             case '2':     {
                 ofstream outputFile; 
-                outputFile.open("Game.txt");
+                outputFile.open("Stats.txt");
                 cout<<"Enter your first name!"<<endl;
                 cin>>name;
-                cout<<" "<<endl;
                 outputFile<<name<<endl;
+                outputFile<<":"<<endl;
                 cout<<"Game is Out of 5. See if you can beat the house!"<<endl;
                 cout<<" "<<endl;
+                int win, lost,draw;
+                win=0;
+                lost=0;
+                draw=0;
                 for(int count=0;count<5;count++)
                 {
                     
                        //play the game
             
                         int card1,card2,value, suit, pT, total, hT; //card1
-                        int win, lost,draw;
+                        
                         //card2, value to pass to by reference, suit , player total
                         //points, total to pass by reference, house total
                         char yn; //yes or no 
@@ -147,36 +151,41 @@ int main(int argc, char** argv) {
                        if(pT>hT&&pT<21)
                        {
                            cout<<"You win"<<endl;
-                           outputFile<<"Win- "<<endl;
-                           
+                           win++;
                        }
                        else if(hT>21&&pT<=21)//if house goes over 21 and player
                        {                        //is below 21
                            cout<<"House went over 21. You win"<<endl;
-                           outputFile<<"Win- "<<endl;
-                           
+                           win++;
                        }
                        else if(pT>21)//if player gets over 21
                        {
                            cout<<"Bust! You went over 21!"<<endl;
-                           outputFile<<"Lost- "<<endl;
+                           lost++;
                        }
                        else if(pT<hT&&hT<=21)//if house gets closer to 21 but 
                        {                    //below 21
                            cout<<"House Wins "<<endl;
-                           outputFile<<"Lost- "<<endl;
+                           lost++;
                        }
                        else if(pT==hT)//draw if player and house gets the same 
                        {                //score
                            cout<<"Draw!"<<endl;
-                           outputFile<<"Draw- "<<endl;
+                           draw++;
                            
                        }
                    
                 }
-                 outputFile.close();
+                outputFile<<" win-"<<endl;
+                outputFile<<win<<endl;
+                outputFile<<" lost-"<<endl;
+                outputFile<<lost<<endl;
+                outputFile<<" draw-"<<endl;
+                outputFile<<draw<<endl;
+                outputFile.close();
                     
                        cout<<" "<<endl;
+                       cout<<"Stats Updated to File!"<<endl;
                        cout<<"Press enter to continue"<<endl;
                        cin.get();//pause so its easier to see interface
                                 break;

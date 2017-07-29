@@ -1,0 +1,8 @@
+Joshua
+:
+ win-
+1
+ lost-
+4
+ draw-
+0
