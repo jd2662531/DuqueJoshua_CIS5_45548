@@ -1,0 +1,9 @@
+joe
+:
+ win-
+3
+ lost-
+8
+ draw-
+0
+ win percentage: %25

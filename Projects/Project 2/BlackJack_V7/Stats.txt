@@ -1,0 +1,9 @@
+joshua
+:
+ win-
+3
+ lost-
+3
+ draw-
+0
+ win percentage: %50
